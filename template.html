@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/app.js"></script>
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div x-data="{mobileMenu: false}" id="outer-wrapper" class="w-full h-full bg-white">
+
+        <!-- Navigation starts -->
+        <nav class="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
+            <div class="hidden lg:flex w-full pr-6">
+                <div class="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
+                    <div class="relative w-full">
+                        <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
+                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg3.svg" alt="Search">
+                        </div>
+                        <input class="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-600 placeholder-gray-600 bg-gray-100 pl-12 py-2" type="text" placeholder="Search" />
+                    </div>
+                </div>
+                <div class="w-1/2 hidden lg:flex">
+                    <div class="w-full flex items-center pl-8 justify-end">
+                        <div class="h-full w-20 flex items-center justify-center border-r border-l">
+                            <button aria-label="open notifications" class="relative cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-800">
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg5.svg" alt="notifications">
+                                <div class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"></div>
+                            </button>
+                        </div>
+                        <div  class="h-full w-20 flex items-center justify-center border-r mr-4 cursor-pointer text-gray-600 ">
+                            <button aria-label="open chats" class="focus:outline-none focus:ring-2 focus:ring-gray-800">
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg4.svg" alt="chats">
+                            </button>
+                        </div>
+                        <div class="flex items-center relative cursor-pointer" onclick="dropdownHandler(this)">
+                            <div class="rounded-full">
+                                <ul class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 hidden">
+                                    <li class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <circle cx="12" cy="7" r="4" />
+                                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                            </svg>
+                                            <a href="javascript:void(0)" class="text-sm ml-2">My Profile</a>
+                                        </div>
+                                    </li>
+                                    <li class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                                <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                                            </svg>
+                                            <a href="javascript:void(0)" class="text-sm ml-2">Sign out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="relative">
+                                    <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png" alt="display avatar" role="img" />
+                                    <div class="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-800 text-sm mx-3">Username</p>
+                            <button aria-label="open profile options" class="cursor-pointer text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600">
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg6.svg" alt="down">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button @click="mobileMenu = !mobileMenu" aria-label="Main Menu" class="text-gray-600 mr-8 visible lg:hidden relative focus:outline-none focus:ring-2 focus:ring-gray-600 " id="menu">
+                <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg> 
+            </button>
+        </nav>
+        <!-- Navigation ends -->
+        
+        <div id="inner-wrapper" class="flex flex-no-wrap">
+            <!-- Sidebar starts -->
+            <div  style="min-height: 700px" class="absolute lg:relative w-80 h-screen shadow bg-gray-50 hidden lg:block">
+                <ul class="py-6">
+                      <li class="pl-6 cursor-pointer text-sm leading-3 tracking-normal my-1 py-1 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                          <div class="flex items-center">
+                              <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z" />
+                                </svg>                                
+                              </div>
+                              <a href="javascript:void(0)" class="ml-2">Inbox</a>
+                          </div>
+                      </li>
+                      <li class="pl-6 cursor-pointer text-gray-800 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                          <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-red-700">
+                              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                            </svg>                            
+                              <a href="javascript:void(0)" class="ml-2">Next</a>
+                          </div>
+                      </li>
+                      <li class="pl-6 cursor-pointer text-gray-800 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                          <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-yellow-600">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M7.875 14.25l1.214 1.942a2.25 2.25 0 001.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 011.872 1.002l.164.246a2.25 2.25 0 001.872 1.002h2.092a2.25 2.25 0 001.872-1.002l.164-.246A2.25 2.25 0 0116.954 9h4.636M2.41 9a2.25 2.25 0 00-.16.832V12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 01.382-.632l3.285-3.832a2.25 2.25 0 011.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0021.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 002.25 2.25z" />
+                            </svg>                            
+                              <a href="javascript:void(0)" class="ml-2">All</a>
+                          </div>
+                      </li>
+                </ul>
+                <hr class="divide-y" />
+                <ul class="py-4">
+                    <li class="pl-6 cursor-pointer text-gray-800 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <a href="javascript:void(0)" class="ml-2">Today</a>
+                      </div>
+                  </li>
+
+
+                  <li class="pl-6 cursor-pointer text-gray-800 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                          </svg>                        
+                          <a href="javascript:void(0)" class="ml-2">Tomorrow</a>
+                      </div>
+                  </li>
+                  </li>
+
+
+                  <li class="pl-6 cursor-pointer text-gray-800 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>                   
+                          <a href="javascript:void(0)" class="ml-2">This Week</a>
+                      </div>
+                  </li>
+                  </li>
+
+
+                  <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>                   
+                          <a href="javascript:void(0)" class="ml-2">Next Week</a>
+                      </div>
+                  </li>
+                  </li>
+
+
+                  <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                          </svg>                        
+                          <a href="javascript:void(0)" class="ml-2">Later</a>
+                      </div>
+                  </li>
+
+                </ul>
+                <h4 class="ml-4 text-sm text-gray-600">Projects</h4>
+                <ul class="pt-2 pb-6">
+                    <li class="pl-6 cursor-pointer text-sm leading-3 tracking-normal my-1 py-1 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        <div class="flex items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <rect x="4" y="4" width="6" height="6" rx="1" />
+                                    <rect x="14" y="4" width="6" height="6" rx="1" />
+                                    <rect x="4" y="14" width="6" height="6" rx="1" />
+                                    <rect x="14" y="14" width="6" height="6" rx="1" />
+                                </svg>
+                            </div>
+                            <a href="javascript:void(0)" class="ml-2">Project Alpha</a>
+                        </div>
+                    </li>
+                    <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
+                            </svg>
+                            <a href="javascript:void(0)" class="ml-2">Project Bravo</a>
+                        </div>
+                    </li>
+                    <li class="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal my-1 py-1 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <polyline points="8 16 10 10 16 8 14 14 8 16" />
+                                <circle cx="12" cy="12" r="9" />
+                            </svg>
+                            <a href="javascript:void(0)" class="ml-2">Project Charlie</a>
+                        </div>
+                    </li>
+              </ul>
+            </div>
+            <!--Mobile responsive sidebar-->
+            <div x-show="mobileMenu" x-transition class="absolute w-full h-full z-40 transform lg:hidden" id="mobile-nav">
+                <div class="bg-gray-700 opacity-50 absolute h-full w-full lg:hidden" @click="mobileMenu = false"></div>
+                <div class="absolute z-40 sm:relative w-3/4 md:w-1/2 shadow pb-4 bg-gray-100 lg:hidden transition duration-150 ease-in-out h-full">
+                    <div class="flex flex-col justify-between h-full w-full">
+                        <div>
+                            <div class="flex items-center justify-between px-8">
+                                <div class="h-16 w-full flex justify-end items-center">
+                                    <button aria-label="close sidebar" id="closeSideBar" class="flex items-center justify-center h-10 w-10 focus:outline-none focus:ring-2 focus:ring-gray-800 rounded" onclick="sidebarHandler(false)">
+                                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg2.svg" alt="cross">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div class="flex justify-center mb-4 w-full px-6">
+                                <div class="relative w-full">
+                                    <div class="text-gray-600 absolute ml-4 inset-0 m-auto w-4 h-4">
+                                       <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_header_and_icons-svg3.svg" alt="Search">
+                                    </div>
+                                    <input class="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-600 placeholder-gray-600 pl-10 py-2" type="text" placeholder="Search" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Mobile responsive sidebar-->
+            <!-- Sidebar ends -->
+            <div class="w-full">
+                <!-- Remove class [ h-64 ] when adding a card block -->
+                <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+                    <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
+                    <div class="w-full h-full rounded border-dashed border-2 border-gray-300">
+                        <!-- Place your content here -->
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open">Expand</button>
+                         
+                            <span x-show="open">
+                              Content...
+                            </span>
+                        </div>
+                    </div>
+                    <a href="index.html">Main</a>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+    <script>
+        function dropdownHandler(element) {
+            let single = element.getElementsByTagName("ul")[0];
+            single.classList.toggle("hidden");
+        }
+        const sidebarHandler = (check) => {
+            if (check) {
+                sideBar.style.transform = "translateX(0px)";
+                menu.classList.add("hidden");
+            } else {
+                sideBar.style.transform = "translateX(-100%)";
+                menu.classList.remove("hidden");
+            }
+        };
+        
+    </script>
+  </body>
+</html>
