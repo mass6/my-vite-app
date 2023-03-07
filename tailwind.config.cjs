@@ -12,8 +12,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-      xs: ['0.70rem', { lineHeight: '.90rem' }],
-      sm: ['0.82rem', { lineHeight: '1rem' }],
+      xs: ['0.70rem', { lineHeight: '.9rem' }],
+      sm: ['0.85rem', { lineHeight: '1rem' }],
       },
   },
     accentColor: ({ theme }) => ({
